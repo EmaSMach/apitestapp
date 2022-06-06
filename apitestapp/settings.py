@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-)sl&txxyq3y%h26c+yb25o=^nc9kkw2*#4m^&0$zl0$zegb7*&
 DEBUG = False
 
 ENVIRONMENT = os.environ.get('ENVIRONMENT')
-ALLOWED_HOSTS = ['*.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com', 'emasapitest.herokuapp.com']
 if ENVIRONMENT == 'local':
     ALLOWED_HOSTS.append('*')
     DEBUG = True
