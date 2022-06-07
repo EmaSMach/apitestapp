@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-)sl&txxyq3y%h26c+yb25o=^nc9kkw2*#4m^&0$zl0$zegb7*&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ENVIRONMENT = os.environ.get('ENVIRONMENT')
+ENVIRONMENT = os.environ.get('ENVIRONMENT', 'local')
 ALLOWED_HOSTS = ['.herokuapp.com', 'emasapitest.herokuapp.com']
 if ENVIRONMENT == 'local':
     ALLOWED_HOSTS.append('*')
@@ -88,6 +90,9 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
